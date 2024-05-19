@@ -1,7 +1,7 @@
 import { TMDB_API } from '$env/static/private';
-import { json, type RequestEvent } from '@sveltejs/kit';
+import { json, type RequestHandler } from '@sveltejs/kit';
 
-export async function POST({ request }: RequestEvent) {
+export const POST: RequestHandler = async ({ request }) => {
 	const { query } = await request.json();
 	const { results: movies } = await (
 		await fetch(
@@ -11,4 +11,4 @@ export async function POST({ request }: RequestEvent) {
 		)
 	).json();
 	return json(movies);
-}
+};
